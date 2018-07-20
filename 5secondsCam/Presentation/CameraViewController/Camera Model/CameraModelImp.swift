@@ -107,11 +107,9 @@ class CameraModelImp: CameraModel {
     
     func requestAccessToCamera(completionHandler: @escaping (Bool) -> Void) {
         AVCaptureDevice.requestAccess(for: .video) { (successForVideo) in
-            AVCaptureDevice.requestAccess(for: .audio) { (_) in
-                DispatchQueue.main.async {
-                    self.cameraSetupResult = successForVideo ? .success : .notAuthorized
-                    completionHandler(successForVideo)
-                }
+            DispatchQueue.main.async {
+                self.cameraSetupResult = successForVideo ? .success : .notAuthorized
+                completionHandler(successForVideo)
             }
         }
     }
