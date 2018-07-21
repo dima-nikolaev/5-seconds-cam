@@ -42,7 +42,7 @@ class CameraModelImp: CameraModel {
             let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         var coreImage = CIImage(cvImageBuffer: imageBuffer)
         coreImage = coreImage
-            .transformed(by: coreImage.orientationTransform(for: cameraPosition == .back ? .right : .leftMirrored))
+            .transformed(by: coreImage.orientationTransform(for: cameraPosition == .back ? .up : .upMirrored))
         return UIImage(ciImage: coreImage)
     }
     
