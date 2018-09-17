@@ -26,8 +26,9 @@ class CameraViewController: UIViewController {
     // MARK: - Views
     
     private lazy var detectionView: DetectionView = {
+        let topInset = (UIApplication.shared.delegate as? AppDelegate)?.window?.safeAreaInsets.top ?? 0
         let detectionView = DetectionView(frame: CGRect(x: view.bounds.width/2 - 56,
-                                                        y: view.safeAreaInsets.top + 15,
+                                                        y: topInset + 15,
                                                         width: 112,
                                                         height: 32))
         detectionView.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
