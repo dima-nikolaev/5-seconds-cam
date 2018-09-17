@@ -361,8 +361,9 @@ class CameraModelImp: CameraModel {
 extension CameraModelImp: VideoRecordingServiceDelegate {
     
     func sampleBufferWasUpdate(newSampleBuffer: CMSampleBuffer) {
-        guard let quadrilateral = quadrilateralDetector.detect(in: newSampleBuffer) else { return }
-        delegate?.newQuadrilateralWasDetect(quadrilateral: quadrilateral)
+        let result = quadrilateralDetector.detect(in: newSampleBuffer)
+        delegate?.newQuadrilateralWasDetect(quadrilateral: result.quadrilateral,
+                                            isIphone: result.isIphone)
     }
     
 }

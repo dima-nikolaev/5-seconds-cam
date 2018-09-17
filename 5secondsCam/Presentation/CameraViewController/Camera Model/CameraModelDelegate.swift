@@ -11,6 +11,6 @@ import Foundation
 protocol CameraModelDelegate: class {
     
     func cameraSubjectAreaDidChange()
-    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral)
+    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral?, isIphone: Bool)
     
 }

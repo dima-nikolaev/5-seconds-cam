@@ -10,7 +10,7 @@ import AVFoundation
 
 protocol QuadrilateralDetectionService {
     
-    func detect(in sampleBuffer: CMSampleBuffer) -> Quadrilateral?
+    func detect(in sampleBuffer: CMSampleBuffer) -> (quadrilateral: Quadrilateral?, isIphone: Bool)
     
 }
 

@@ -27,18 +27,29 @@ class QuadrilateralDetectionServiceImp {
 
 extension QuadrilateralDetectionServiceImp: QuadrilateralDetectionService {
     
-    func detect(in sampleBuffer: CMSampleBuffer) -> Quadrilateral? {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+    func detect(in sampleBuffer: CMSampleBuffer) -> (quadrilateral: Quadrilateral?, isIphone: Bool) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return (quadrilateral: nil, isIphone: false) }
         let frame = CIImage(cvPixelBuffer: pixelBuffer)
         guard
             let rects = detector.features(in: frame) as? [CIRectangleFeature],
-            let rect = rects.biggest else { return nil }
-        return Quadrilateral(bounds: rect.bounds,
+            let rect = rects.biggest else { return (quadrilateral: nil, isIphone: false) }
+        let height = rect.topLeft.y - rect.bottomLeft.y
+        let width = rect.topRight.x - rect.topLeft.x
+        let ratio = width / height
+        let isIphone: Bool
+        switch ratio {
+        case 0.54...0.58, 0.44...0.48:
+            isIphone = true
+        default:
+            isIphone = false
+        }
+        return (quadrilateral: Quadrilateral(bounds: rect.bounds,
                              topLeft: rect.topLeft,
                              topRight: rect.topRight,
                              bottomLeft: rect.bottomLeft,
                              bottomRight: rect.bottomRight,
-                             frameSize: frame.extent.size)
+                             frameSize: frame.extent.size),
+                isIphone: isIphone)
     }
     
 }

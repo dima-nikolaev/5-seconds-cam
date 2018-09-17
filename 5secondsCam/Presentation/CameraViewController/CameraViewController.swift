@@ -395,8 +395,9 @@ extension CameraViewController: CameraModelDelegate {
         cameraView.hideFocus()
     }
     
-    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral) {
+    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral?, isIphone: Bool) {
         DispatchQueue.main.async {
+            self.detectionView.state = isIphone ? .iPhone : .notIPhone
             self.cameraView.draw(quadrilateral)
         }
     }

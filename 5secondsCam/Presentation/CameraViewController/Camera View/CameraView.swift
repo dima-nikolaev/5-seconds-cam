@@ -101,7 +101,11 @@ class CameraView: UIView {
     
     private lazy var quadrilateralView = QuadrilateralView(frame: bounds)
     
-    func draw(_ quadrilateral: Quadrilateral) {
+    func draw(_ quadrilateral: Quadrilateral?) {
+        guard let quadrilateral = quadrilateral else {
+            quadrilateralView.shapeLayer.path = nil
+            return
+        }
         let ratio = bounds.width / quadrilateral.frameSize.width
         let scaledQuadrilateral = quadrilateral.scaled(by: ratio)
         let path = UIBezierPath()
