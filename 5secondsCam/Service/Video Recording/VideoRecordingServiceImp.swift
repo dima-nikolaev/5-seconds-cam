@@ -127,6 +127,8 @@ class VideoRecordingServiceImp: NSObject, VideoRecordingService {
     
     private(set) var lastSampleBuffer: CMSampleBuffer?
     
+    weak var delegate: VideoRecordingServiceDelegate?
+    
 }
 
 // MARK: - Data Output Sample Buffer Delegate
@@ -137,6 +139,7 @@ extension VideoRecordingServiceImp: AVCaptureVideoDataOutputSampleBufferDelegate
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
         lastSampleBuffer = sampleBuffer
+        delegate?.sampleBufferWasUpdate(newSampleBuffer: sampleBuffer)
         guard isRecording else { return }
         if let writerStatus = assetWriter?.status, writerStatus == .unknown {
             let startTime = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)

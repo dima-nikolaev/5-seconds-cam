@@ -23,6 +23,17 @@ class CameraViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Views
+    
+    private lazy var detectionView: DetectionView = {
+        let detectionView = DetectionView(frame: CGRect(x: view.bounds.width/2 - 56,
+                                                        y: view.safeAreaInsets.top + 15,
+                                                        width: 112,
+                                                        height: 32))
+        detectionView.autoresizingMask = [.flexibleLeftMargin, .flexibleBottomMargin]
+        return detectionView
+    }()
+    
     private lazy var cameraView: CameraView = {
         let view = CameraView(session: model.captureSession)
         view.delegate = self
@@ -220,6 +231,7 @@ class CameraViewController: UIViewController {
         view.addSubview(photoThumbButton)
         view.addSubview(changeCameraButton)
         view.addSubview(flashButton)
+        view.addSubview(detectionView)
         
         disableCameraButtons()
         
@@ -381,6 +393,12 @@ extension CameraViewController: CameraModelDelegate {
     
     func cameraSubjectAreaDidChange() {
         cameraView.hideFocus()
+    }
+    
+    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral) {
+        DispatchQueue.main.async {
+            self.cameraView.draw(quadrilateral)
+        }
     }
     
 }

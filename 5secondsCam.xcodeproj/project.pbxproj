@@ -17,6 +17,10 @@
 		321689BA2100C19700C9A6DD /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321689B92100C19600C9A6DD /* PresentationAssembly.swift */; };
 		321689BC2100C1A900C9A6DD /* PresentationAssemblyImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321689BB2100C1A900C9A6DD /* PresentationAssemblyImp.swift */; };
 		321689BE2100C35E00C9A6DD /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321689BD2100C35E00C9A6DD /* RootAssembly.swift */; };
+		3236708E214BDF4500EDD436 /* DetectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3236708D214BDF4500EDD436 /* DetectionView.swift */; };
+		32367091214BE92600EDD436 /* QuadrilateralDetectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32367090214BE92600EDD436 /* QuadrilateralDetectionService.swift */; };
+		32367093214BE93500EDD436 /* QuadrilateralDetectionServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32367092214BE93500EDD436 /* QuadrilateralDetectionServiceImp.swift */; };
+		32367095214BE99D00EDD436 /* Quadrilateral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32367094214BE99D00EDD436 /* Quadrilateral.swift */; };
 		3265CB4920FFC5BD00E03ACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3265CB4820FFC5BD00E03ACE /* AppDelegate.swift */; };
 		3265CB5020FFC5BE00E03ACE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3265CB4F20FFC5BE00E03ACE /* Assets.xcassets */; };
 		3265CB5320FFC5BE00E03ACE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3265CB5120FFC5BE00E03ACE /* LaunchScreen.storyboard */; };
@@ -67,6 +71,10 @@
 		321689B92100C19600C9A6DD /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		321689BB2100C1A900C9A6DD /* PresentationAssemblyImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssemblyImp.swift; sourceTree = "<group>"; };
 		321689BD2100C35E00C9A6DD /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		3236708D214BDF4500EDD436 /* DetectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionView.swift; sourceTree = "<group>"; };
+		32367090214BE92600EDD436 /* QuadrilateralDetectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralDetectionService.swift; sourceTree = "<group>"; };
+		32367092214BE93500EDD436 /* QuadrilateralDetectionServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadrilateralDetectionServiceImp.swift; sourceTree = "<group>"; };
+		32367094214BE99D00EDD436 /* Quadrilateral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrilateral.swift; sourceTree = "<group>"; };
 		3265CB4520FFC5BD00E03ACE /* 5secondsCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 5secondsCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3265CB4820FFC5BD00E03ACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3265CB4F20FFC5BE00E03ACE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -150,6 +158,24 @@
 			path = "Camera Model";
 			sourceTree = "<group>";
 		};
+		3236708C214BDDDC00EDD436 /* Info View */ = {
+			isa = PBXGroup;
+			children = (
+				3236708D214BDF4500EDD436 /* DetectionView.swift */,
+			);
+			path = "Info View";
+			sourceTree = "<group>";
+		};
+		3236708F214BE8F500EDD436 /* Quadrilateral Detection */ = {
+			isa = PBXGroup;
+			children = (
+				32367090214BE92600EDD436 /* QuadrilateralDetectionService.swift */,
+				32367092214BE93500EDD436 /* QuadrilateralDetectionServiceImp.swift */,
+				32367094214BE99D00EDD436 /* Quadrilateral.swift */,
+			);
+			path = "Quadrilateral Detection";
+			sourceTree = "<group>";
+		};
 		3265CB3C20FFC5BD00E03ACE = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +241,7 @@
 		3265CB7720FFC5F800E03ACE /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				3236708F214BE8F500EDD436 /* Quadrilateral Detection */,
 				321689A521009E0F00C9A6DD /* Photo Shooting */,
 				321689A621009E6600C9A6DD /* Video Recording */,
 			);
@@ -225,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				3265CB7920FFC63100E03ACE /* CameraViewController.swift */,
+				3236708C214BDDDC00EDD436 /* Info View */,
 				321689B02100BF1600C9A6DD /* Camera Model */,
 				3265CB8D210098BD00E03ACE /* Camera View */,
 				3265CB8220FFC70D00E03ACE /* Photo Thumb Button */,
@@ -419,15 +447,19 @@
 				3265CB8C20FFC82600E03ACE /* CameraButton.swift in Sources */,
 				321689BE2100C35E00C9A6DD /* RootAssembly.swift in Sources */,
 				3265CB4920FFC5BD00E03ACE /* AppDelegate.swift in Sources */,
+				3236708E214BDF4500EDD436 /* DetectionView.swift in Sources */,
 				3265CB8F2100990D00E03ACE /* CameraView.swift in Sources */,
 				3265CB7A20FFC63100E03ACE /* CameraViewController.swift in Sources */,
 				3265CB9A21009B5E00E03ACE /* CameraToggleView.swift in Sources */,
 				3265CB94210099AE00E03ACE /* FocusView.swift in Sources */,
 				321689BA2100C19700C9A6DD /* PresentationAssembly.swift in Sources */,
+				32367093214BE93500EDD436 /* QuadrilateralDetectionServiceImp.swift in Sources */,
+				32367091214BE92600EDD436 /* QuadrilateralDetectionService.swift in Sources */,
 				321689AE21009F3000C9A6DD /* VideoRecordingServiceImp.swift in Sources */,
 				321689AC21009F1800C9A6DD /* VideoRecordingService.swift in Sources */,
 				321689B22100BF3600C9A6DD /* CameraModelDelegate.swift in Sources */,
 				3265CB9621009A0700E03ACE /* FocusExposureView.swift in Sources */,
+				32367095214BE99D00EDD436 /* Quadrilateral.swift in Sources */,
 				3265CB8420FFC72500E03ACE /* PhotoThumbButton.swift in Sources */,
 				326AC86221009BF100D117D8 /* CameraToggleViewDelegate.swift in Sources */,
 				3265CB912100994200E03ACE /* CameraViewDelegate.swift in Sources */,

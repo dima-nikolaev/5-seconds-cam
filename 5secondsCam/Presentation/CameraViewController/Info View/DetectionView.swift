@@ -1,5 +1,5 @@
 //
-//  InfoView.swift
+//  DetectionView.swift
 //  5secondsCam
 //
 //  Created by Dima on 14/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetectView: UIView {
+class DetectionView: UIView {
     
     var state = InfoViewState.notIPhone {
         didSet {
@@ -27,11 +27,14 @@ class DetectView: UIView {
         label.backgroundColor = .red
         label.textColor = .white
         label.text = "Not iPhone"
+        label.textAlignment = .center
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        layer.masksToBounds = true
+        layer.cornerRadius = bounds.height/2
         addSubview(label)
     }
     

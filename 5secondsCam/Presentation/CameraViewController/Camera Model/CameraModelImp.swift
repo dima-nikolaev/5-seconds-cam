@@ -13,8 +13,13 @@ class CameraModelImp: CameraModel {
     
     private lazy var photoShootingService: PhotoShootingService = PhotoShootingServiceImp(session: captureSession,
                                                                                           queue: captureSessionQueue)
-    private lazy var videoRecordingService: VideoRecordingService = VideoRecordingServiceImp(session: captureSession,
-                                                                                             queue: captureSessionQueue)
+    private lazy var videoRecordingService: VideoRecordingService = {
+        let service = VideoRecordingServiceImp(session: captureSession,
+                                            queue: captureSessionQueue)
+        service.delegate = self
+        return service
+    }()
+    private lazy var quadrilateralDetector: QuadrilateralDetectionService = QuadrilateralDetectionServiceImp()
     
     init() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -349,6 +354,15 @@ class CameraModelImp: CameraModel {
                                      depthDataMode: true,
                                      willCaptureAnimation: willCaptureAnimation,
                                      completion: completion)
+    }
+    
+}
+
+extension CameraModelImp: VideoRecordingServiceDelegate {
+    
+    func sampleBufferWasUpdate(newSampleBuffer: CMSampleBuffer) {
+        guard let quadrilateral = quadrilateralDetector.detect(in: newSampleBuffer) else { return }
+        delegate?.newQuadrilateralWasDetect(quadrilateral: quadrilateral)
     }
     
 }

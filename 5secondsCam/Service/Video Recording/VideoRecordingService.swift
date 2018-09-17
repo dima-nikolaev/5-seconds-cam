@@ -19,4 +19,13 @@ protocol VideoRecordingService {
     
     var lastSampleBuffer: CMSampleBuffer? { get }
     
+    var delegate: VideoRecordingServiceDelegate? { get set }
+    
 }
+
+protocol VideoRecordingServiceDelegate: class {
+    
+    func sampleBufferWasUpdate(newSampleBuffer: CMSampleBuffer)
+    
+}
+

@@ -6,4 +6,11 @@
 //  Copyright © 2018 Dima Nikolaev. All rights reserved.
 //
 
-import Foundation
+import AVFoundation
+
+protocol QuadrilateralDetectionService {
+    
+    func detect(in sampleBuffer: CMSampleBuffer) -> Quadrilateral?
+    
+}
+

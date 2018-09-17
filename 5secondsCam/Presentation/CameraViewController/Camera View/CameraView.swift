@@ -37,6 +37,8 @@ class CameraView: UIView {
         
         addSubview(focusExposureView)
         addSubview(previewContainer)
+        
+        addSubview(quadrilateralView)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -96,6 +98,23 @@ class CameraView: UIView {
         container.addSubview(blurView)
         return container
     }()
+    
+    private lazy var quadrilateralView = QuadrilateralView(frame: bounds)
+    
+    func draw(_ quadrilateral: Quadrilateral) {
+        let ratio = bounds.width / quadrilateral.frameSize.width
+        let scaledQuadrilateral = quadrilateral.scaled(by: ratio)
+        let path = UIBezierPath()
+        path.move(to: scaledQuadrilateral.topLeft)
+        path.addLine(to: scaledQuadrilateral.topRight)
+        path.addLine(to: scaledQuadrilateral.bottomRight)
+        path.addLine(to: scaledQuadrilateral.bottomLeft)
+        path.addLine(to: scaledQuadrilateral.topLeft)
+        path.close()
+        let transform = CGAffineTransform(scaleX: 1, y: -1).translatedBy(x: 0, y: -bounds.height)
+        path.apply(transform)
+        quadrilateralView.shapeLayer.path = path.cgPath
+    }
     
 }
 
@@ -162,6 +181,31 @@ extension CameraView: UIGestureRecognizerDelegate {
         } else {
             return focusExposureView.alpha == 0
         }
+    }
+    
+}
+
+class QuadrilateralView: UIView {
+    
+    override class var layerClass: AnyClass {
+        return CAShapeLayer.self
+    }
+    
+    var shapeLayer: CAShapeLayer {
+        return layer as! CAShapeLayer
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        shapeLayer.strokeColor = UIColor.white.cgColor
+        shapeLayer.fillColor = UIColor(white: 1, alpha: 0.6666).cgColor
+        shapeLayer.lineWidth = 1.8
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

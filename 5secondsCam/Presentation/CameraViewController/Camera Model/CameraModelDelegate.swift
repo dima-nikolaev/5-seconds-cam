@@ -11,5 +11,6 @@ import Foundation
 protocol CameraModelDelegate: class {
     
     func cameraSubjectAreaDidChange()
+    func newQuadrilateralWasDetect(quadrilateral: Quadrilateral)
     
 }
